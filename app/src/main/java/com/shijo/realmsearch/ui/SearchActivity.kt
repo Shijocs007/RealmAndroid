@@ -1,11 +1,12 @@
-package com.shijo.realmsearch
+package com.shijo.realmsearch.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.shijo.realmsearch.R
 
-class SplashActivity : AppCompatActivity() {
+class SearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        setContentView(R.layout.activity_search)
     }
 }
