@@ -3,13 +3,11 @@ package com.shijo.realmsearch.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
-import androidx.core.content.ContentProviderCompat.requireContext
+
 import androidx.core.content.ContextCompat
 import com.google.android.flexbox.FlexboxLayout
 import com.google.android.material.chip.Chip
 import com.shijo.realmsearch.R
-import kotlinx.android.synthetic.main.activity_search.*
 
 class SearchActivity : AppCompatActivity() {
 

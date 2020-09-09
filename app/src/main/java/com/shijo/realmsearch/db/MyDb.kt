@@ -15,4 +15,8 @@ class MyDb(private val realm: Realm) {
         realm.commitTransaction()
     }
 
+    fun getAllSearchData(searckKeys : List<String>) : List<Results> {
+        return realm.where(Results::class.java).findAll()
+    }
+
 }
