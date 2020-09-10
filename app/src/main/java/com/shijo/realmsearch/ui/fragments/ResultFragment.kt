@@ -15,6 +15,7 @@ import com.shijo.realmsearch.R
 import com.shijo.realmsearch.adapter.UnitAdapter
 import com.shijo.realmsearch.databinding.FragmentResultBinding
 import com.shijo.realmsearch.models.Results
+import com.shijo.realmsearch.models.Units
 import com.shijo.realmsearch.viewmodel.SearchViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import io.realm.Realm
@@ -68,6 +69,7 @@ class ResultFragment : Fragment() {
             binding.rvParent.adapter = adapter
         })
     }
+
 
     companion object {
         /**

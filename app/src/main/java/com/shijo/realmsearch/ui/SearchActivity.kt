@@ -1,8 +1,10 @@
 package com.shijo.realmsearch.ui
 
+import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 
 import androidx.core.content.ContextCompat
@@ -27,12 +29,16 @@ class SearchActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search)
         binding.viewmodel = viewModel
         initObservers()
-        viewModel.searchData()
+
+        binding.searchKey.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                addNewChip(binding.searchKey.text.toString(), binding.rsearchGroup)
+                true
+            }
+            false
+        }
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
 
     private fun initObservers() {
         viewModel.getSearchLivedata().observe(this, Observer {
@@ -41,14 +47,24 @@ class SearchActivity : AppCompatActivity() {
         })
     }
 
-    private fun addNewChip(person: String, chipGroup: FlexboxLayout) {
+    private fun addNewChip(chipText: String, chipGroup: FlexboxLayout) {
         val chip = Chip(this)
-        chip.text = person
-        chip.chipIcon = ContextCompat.getDrawable(this, R.mipmap.ic_launcher_round)
+        chip.text = chipText
+        chip.setCloseIconResource(R.drawable.close_button)
         chip.isCloseIconEnabled = true
         chip.isClickable = true
         chip.isCheckable = false
+        chip.setTextColor(resources.getColor(R.color.realm_yellow))
+        chip.chipBackgroundColor = ColorStateList.valueOf(
+            ContextCompat.getColor(this, R.color.recycler_item_bg)
+        )
+        chip.setBackgroundColor(resources.getColor(R.color.recycler_item_bg))
         chipGroup.addView(chip as View, chipGroup.childCount - 1)
-        chip.setOnCloseIconClickListener { chipGroup.removeView(chip as View) }
+        viewModel.searchData(chipText, true)
+        binding.searchKey.setText("")
+        chip.setOnCloseIconClickListener {
+            chipGroup.removeView(chip as View)
+            viewModel.searchData(chipText, false)
+        }
     }
 }

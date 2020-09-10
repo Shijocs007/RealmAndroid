@@ -18,8 +18,16 @@ constructor(private val repository: SearchRepository,
     var searchLiveData = MutableLiveData<List<Results>>()
     var searchKeys = ArrayList<String>()
 
-    fun searchData()  {
+    fun searchData(key : String, isAdd : Boolean)  {
 
+        if(isAdd) {
+            searchKeys.add(key)
+        } else {
+            searchKeys.remove(key)
+        }
+        if(searchKeys.isNullOrEmpty()) {
+            return
+        }
         Coroutines.main {
             searchLiveData.value = repository.getAllSearchData(searchKeys)
         }
