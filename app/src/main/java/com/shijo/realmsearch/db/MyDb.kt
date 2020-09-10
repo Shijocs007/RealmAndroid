@@ -11,11 +11,12 @@ class MyDb(private val realm: Realm) {
      * */
     fun insertAllData(results: List<Results>) {
         realm.beginTransaction()
+        realm.deleteAll()
         realm.insertOrUpdate(results)
         realm.commitTransaction()
     }
 
-    fun getAllSearchData(searckKeys : List<String>) : List<Results> {
+    suspend fun getAllSearchData(searckKeys : List<String>) : List<Results> {
         return realm.where(Results::class.java).findAll()
     }
 

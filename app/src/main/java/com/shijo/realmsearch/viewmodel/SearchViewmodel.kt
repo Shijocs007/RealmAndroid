@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.shijo.realmsearch.Coroutines
 import com.shijo.realmsearch.models.Results
 import com.shijo.realmsearch.repository.SearchRepository
 
@@ -18,7 +19,10 @@ constructor(private val repository: SearchRepository,
     var searchKeys = ArrayList<String>()
 
     fun searchData()  {
-        searchLiveData.value = repository.getAllSearchData(searchKeys)
+
+        Coroutines.main {
+            searchLiveData.value = repository.getAllSearchData(searchKeys)
+        }
     }
 
     fun getSearchLivedata() : LiveData<List<Results>> {

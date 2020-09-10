@@ -35,6 +35,7 @@ class SplashActivity : AppCompatActivity() {
             it?.let { it1 -> myDb.insertAllData(it1) }
             val intent = Intent(this, SearchActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 

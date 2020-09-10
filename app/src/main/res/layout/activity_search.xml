@@ -1,45 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/bg_gradient"
-    tools:context=".ui.SearchActivity">
-    <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:local="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/toolbar"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.shijo.realmsearch.viewmodel.SearchViewmodel" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
-        android:background="@drawable/shadow_bg"
-        local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        local:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/bg_gradient"
+        tools:context=".ui.SearchActivity">
 
-    <com.google.android.flexbox.FlexboxLayout
-        android:id="@+id/rsearch_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_gravity="center_vertical"
-        app:flexWrap="wrap"
-        app:alignItems="stretch"
-        app:alignContent="space_around"
-        app:showDivider="beginning|middle|end">
+        <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:local="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:background="@drawable/shadow_bg"
+            local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            local:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-        <EditText
-            android:id="@+id/search_key"
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            app:layout_flexGrow="1"
-            android:hint="enter search key"
-            android:textColorHint="@android:color/white"
-            android:textColor="@android:color/white"
-            android:background="@android:color/transparent"
-            android:imeOptions="actionDone"
-            android:inputType="text"/>
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/rsearch_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_gravity="center_vertical"
+            app:flexWrap="wrap"
+            app:alignItems="stretch"
+            app:alignContent="space_around"
+            app:showDivider="beginning|middle|end">
 
-    </com.google.android.flexbox.FlexboxLayout>
+            <EditText
+                android:id="@+id/search_key"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                app:layout_flexGrow="1"
+                android:hint="add another search item"
+                android:textColor="@android:color/white"
+                android:background="@android:color/transparent"
+                android:imeOptions="actionDone"
+                android:inputType="text" />
 
-</LinearLayout>
+        </com.google.android.flexbox.FlexboxLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.viewpager.widget.PagerTabStrip
+                android:id="@+id/pager_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp" />
+
+        </androidx.viewpager.widget.ViewPager>
+
+    </LinearLayout>
+</layout>

@@ -3,4 +3,7 @@
     <color name="colorPrimary">#21579A</color>
     <color name="colorPrimaryDark">#273271</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="realm_yellow">#FFCE32</color>
+    <color name="activity_title_color">#539FD7</color>
+    <color name="recycler_item_bg">#1A2C60</color>
 </resources>

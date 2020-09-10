@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="15dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/recycler_item_bg">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_marginLeft="20dp"
+    android:layout_width="match_parent"
+    android:gravity="center_vertical"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/unit_title"
+        android:layout_width="wrap_content"
+        android:text="Phase"
+        android:textColor="@color/realm_yellow"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/unit_content"
+        android:layout_width="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:text="UNit A 102"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
+    <ImageView
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/arrow_large_24x24"
+        android:layout_width="20dp"
+        android:layout_height="20dp"/>
+
+</RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_unit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
