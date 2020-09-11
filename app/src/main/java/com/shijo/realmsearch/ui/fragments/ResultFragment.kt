@@ -19,6 +19,7 @@ import com.shijo.realmsearch.models.Units
 import com.shijo.realmsearch.viewmodel.SearchViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 import io.realm.Realm
+import io.realm.RealmList
 import kotlinx.android.synthetic.main.fragment_result.view.*
 
 private const val ARG_PARAM1 = "param1"
@@ -64,7 +65,15 @@ class ResultFragment : Fragment() {
 
     private fun initObservers() {
         viewModel.getSearchLivedata().observe(viewLifecycleOwner, Observer {
-            val adapter = it[param1].units?.let { it1 -> UnitAdapter(it1, context) }
+            var units = RealmList<Units>()
+            if(param1 == 0) {
+                for (result in it) {
+                    result.units?.let { it1 -> units.addAll(it1) }
+                }
+            } else {
+                units = it[param1 -1].units!!
+            }
+            val adapter = UnitAdapter(units, context)
             binding.rvParent.layoutManager = LinearLayoutManager(context)
             binding.rvParent.adapter = adapter
         })

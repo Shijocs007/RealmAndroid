@@ -9,9 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shijo.realmsearch.R
 import com.shijo.realmsearch.models.Units
+import io.realm.RealmList
 import kotlinx.android.synthetic.main.parent_list_item.view.*
 
-class UnitAdapter(private val units: List<Units>, private val context: Context?) :    RecyclerView.Adapter<UnitAdapter.ViewHolder>() {
+class UnitAdapter(private val units: RealmList<Units>, private val context: Context?) :    RecyclerView.Adapter<UnitAdapter.ViewHolder>() {
     private val viewPool = RecyclerView.RecycledViewPool()
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -32,9 +33,9 @@ class UnitAdapter(private val units: List<Units>, private val context: Context?)
     ) {
         val result = units[position]
 //        holder.unitTitle.text = result.block_name
-        holder.unitContent.text = result.title
+        holder.unitContent.text = result?.title
 
-        val adapter = result.activities?.let { ActvityAdapter(it) }
+        val adapter = result?.activities?.let { ActvityAdapter(it) }
         holder.recyclerView.layoutManager = LinearLayoutManager(context)
         holder.recyclerView.adapter = adapter
     }

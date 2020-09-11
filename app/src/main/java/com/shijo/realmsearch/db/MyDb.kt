@@ -1,7 +1,9 @@
 package com.shijo.realmsearch.db
 
 import com.shijo.realmsearch.models.Results
+import io.realm.Case
 import io.realm.Realm
+import io.realm.kotlin.where
 
 class MyDb(private val realm: Realm) {
 
@@ -17,7 +19,13 @@ class MyDb(private val realm: Realm) {
     }
 
     suspend fun getAllSearchData(searckKeys : List<String>) : List<Results> {
-        return realm.where(Results::class.java).findAll()
+        val query  = realm.where<Results>()
+        for (key in searckKeys) {
+            query.contains("units.title", key, Case.INSENSITIVE)
+            query.contains("units.activities.activity_name", key, Case.INSENSITIVE)
+            query.contains("units.activities.step_name", key, Case.INSENSITIVE)
+        }
+        return query.findAll()
     }
 
 }

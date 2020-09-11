@@ -48,6 +48,8 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun addNewChip(chipText: String, chipGroup: FlexboxLayout) {
+        if(chipText == "")
+            return
         val chip = Chip(this)
         chip.text = chipText
         chip.setCloseIconResource(R.drawable.close_button)

@@ -44,6 +44,7 @@
                 app:layout_flexGrow="1"
                 android:hint="add another search item"
                 android:textColor="@android:color/white"
+                android:textColorHint="@android:color/holo_green_dark"
                 android:background="@android:color/transparent"
                 android:imeOptions="actionDone"
                 android:inputType="text" />
@@ -52,6 +53,7 @@
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -65,6 +67,18 @@
 
         </androidx.viewpager.widget.ViewPager>
 
+        <LinearLayout
+            android:id="@+id/search_title_layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/search_title_1"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 </layout>

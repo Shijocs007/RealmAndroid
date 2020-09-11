@@ -26,6 +26,7 @@ constructor(private val repository: SearchRepository,
             searchKeys.remove(key)
         }
         if(searchKeys.isNullOrEmpty()) {
+            searchLiveData.value = emptyList()
             return
         }
         Coroutines.main {
