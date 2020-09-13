@@ -1,5 +1,7 @@
 package com.shijo.realmsearch.viewmodel
 
+import android.view.View
+import androidx.databinding.Bindable
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData

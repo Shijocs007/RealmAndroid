@@ -8,11 +8,15 @@ import com.shijo.realmsearch.R
 import com.shijo.realmsearch.db.MyDb
 import com.shijo.realmsearch.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
-
+    val activityScope = CoroutineScope(Dispatchers.Main)
     @Inject
     lateinit var myDb: MyDb
 
@@ -22,8 +26,10 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-
-        insertDataToDb();
+        activityScope.launch {
+            delay(3000)
+            insertDataToDb()
+        }
     }
 
     /**

@@ -3,6 +3,7 @@ package com.shijo.realmsearch.ui
 import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
@@ -15,6 +16,8 @@ import com.google.android.material.chip.Chip
 import com.shijo.realmsearch.R
 import com.shijo.realmsearch.adapter.SearchPagerAdapter
 import com.shijo.realmsearch.databinding.ActivitySearchBinding
+import com.shijo.realmsearch.models.Results
+import com.shijo.realmsearch.utils.Utils
 import com.shijo.realmsearch.viewmodel.SearchViewmodel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,6 +31,7 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search)
         binding.viewmodel = viewModel
+        binding.searchTitle.text = Html.fromHtml(Utils.getHtmleString(viewModel.searchKeys))
         initObservers()
 
         binding.searchKey.setOnEditorActionListener { _, actionId, _ ->
@@ -42,9 +46,32 @@ class SearchActivity : AppCompatActivity() {
 
     private fun initObservers() {
         viewModel.getSearchLivedata().observe(this, Observer {
+            setLayout(it)
             val pagerAdapter = SearchPagerAdapter(supportFragmentManager, it)
             binding.viewPager.adapter = pagerAdapter
+            binding.tabLayout.setupWithViewPager(binding.viewPager)
         })
+    }
+
+    private fun setLayout(results: List<Results>) {
+        if(results.isNotEmpty()) {
+            binding.viewPager.visibility = View.VISIBLE
+            binding.tabLayout.visibility = View.VISIBLE
+            binding.searchTitleLayout.visibility = View.GONE
+        } else {
+            binding.viewPager.visibility = View.GONE
+            binding.tabLayout.visibility = View.GONE
+            binding.searchTitleLayout.visibility = View.VISIBLE
+            if(viewModel.searchKeys.isEmpty()) {
+                binding.searchTitle.text = Html.fromHtml(Utils.getHtmleString(viewModel.searchKeys))
+                binding.searchKey.hint = "enter search items here"
+                binding.searchImg.setImageDrawable(resources.getDrawable(R.drawable.search_title_1))
+            } else {
+                binding.searchTitle.text = Html.fromHtml(Utils.getHtmleString(viewModel.searchKeys))
+                binding.searchKey.hint = "add another item"
+                binding.searchImg.setImageDrawable(resources.getDrawable(R.drawable.search_title_2))
+            }
+        }
     }
 
     private fun addNewChip(chipText: String, chipGroup: FlexboxLayout) {

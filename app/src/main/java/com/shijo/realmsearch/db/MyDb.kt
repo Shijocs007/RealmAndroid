@@ -21,9 +21,9 @@ class MyDb(private val realm: Realm) {
     suspend fun getAllSearchData(searckKeys : List<String>) : List<Results> {
         val query  = realm.where<Results>()
         for (key in searckKeys) {
-            query.contains("units.title", key, Case.INSENSITIVE)
-            query.contains("units.activities.activity_name", key, Case.INSENSITIVE)
-            query.contains("units.activities.step_name", key, Case.INSENSITIVE)
+            query.contains("units.title", key, Case.INSENSITIVE).or()
+            query.contains("units.activities.activity_name", key, Case.INSENSITIVE).or()
+            query.contains("units.activities.step_name", key, Case.INSENSITIVE).or()
         }
         return query.findAll()
     }

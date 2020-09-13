@@ -20,4 +20,19 @@ object Utils {
         }
         return null
     }
+
+    fun getHtmleString(keys : List<String>) : String {
+        var text = ""
+        if(keys.isNullOrEmpty()) {
+            text = "type start searching for <br> <font color = #FFCE32> Units, Activities, Status</font>"
+        } else {
+            text = "Terms(s) "
+            for (key in keys) {
+                text = "$text <font color = #FFCE32>$key</font>,"
+            }
+
+            text = "$text not found"
+        }
+        return text
+    }
 }
